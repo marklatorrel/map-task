@@ -14,3 +14,12 @@ body {
     left: 0;
     padding: 10px;
   }
+
+  .marker {
+    background-image: url('mapbox-icon.png');
+    background-size: cover;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
