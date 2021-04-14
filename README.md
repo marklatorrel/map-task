@@ -14,6 +14,8 @@ Just clone the repository and open the html in any browser.
 Roadmap of future improvements: 
 I would include the real time it would take me to drive from my home and office and viceversa. Getting the traffic from a public API.
 
+Picture of the webpage:
+<img width="1017" alt="map-task-min" src="https://user-images.githubusercontent.com/78828172/114662326-1c73c300-9cbe-11eb-99a7-186f62effad2.png">
 
 License information: Copyright 2021 MITxPro
 
