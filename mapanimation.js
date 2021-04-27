@@ -25,7 +25,7 @@
   var currentMarkers=[];
 
 async function run () {
-  const locations = await getChargersLocations();
+  const locations = await getBusLocations();
   console.log(new Date());
   console.log(locations);
 
@@ -56,7 +56,7 @@ var marker1 = new mapboxgl.Marker()
 }
 
 
-async function getChargersLocations() {
+async function getBusLocations() {
   const url = 'https://api-v3.mbta.com/vehicles?filter[route]=1&include=trip';
   const response = await fetch(url);
   const json = await response.json();
