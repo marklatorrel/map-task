@@ -4,7 +4,8 @@
 This is a first version of a bus tracking app. In this case we are tracking the buses of route 1, from MIT to Harvard. You can see each bus identified by their own ID and the position refreshes every 5 seconds. Hope you like it.
 
 ## Picture of the project
-<img width="1017" alt="map-task-min" src="https://user-images.githubusercontent.com/78828172/114662326-1c73c300-9cbe-11eb-99a7-186f62effad2.png">
+<img width="1284" alt="Captura de Pantalla 2021-04-26 a la(s) 22 22 59" src="https://user-images.githubusercontent.com/78828172/116180120-06163000-a6de-11eb-8b03-535155830a0a.png">
+
 
 ## How to run
 You only need to clone the repository and run the Index.html code on any web browser.
