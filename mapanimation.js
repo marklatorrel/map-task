@@ -1,15 +1,5 @@
 // This array contains the coordinates for all bus stops between MIT and Harvard
 
-  const place = [
-      { 
-          "name": "This is my Home",
-          "coordinates": [-76.968125, -12.104884] },
-
-      { 
-        "name": "Here is were my Job is",
-        "coordinates": [-76.971502, -12.086293] }
-   ]
-  
   // TODO: add your own access token
   mapboxgl.accessToken = 'pk.eyJ1IjoibWFya2xhdG9ycmVsIiwiYSI6ImNrbmdweXM3NjAzamkycHAxNWVlcDE1bHAifQ.hQYmIvPQoDOmhXCN_CcjQQ';
   
@@ -17,39 +7,63 @@
   let map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v10',
-    center: [-76.968125, -12.104884],
-    zoom: 14,
+    center: [-71.0942, 42.3601],
+    zoom: 13,
   });
 
   map.addControl(new mapboxgl.NavigationControl());
   
   // TODO: add a marker to the map at the first coordinates in the array busStops. The marker variable should be named "marker"
-  
-  var marker = new mapboxgl.Marker({
-    color: "#FF0000"})
-    .setLngLat([-76.968125, -12.104884])
-    .addTo(map);
 
-  
-  // counter here represents the index of the current bus stop
-  let counter = 0;
-  let poptext = "This is my home";
-  function move() {
-    // TODO: move the marker on the map every 1000ms. Use the function marker.setLngLat() to update the marker coordinates
-    setTimeout(() =>{
-    if(counter>=place.length) counter = 0;
-    poptext = place[counter]["name"];
-   marker.setLngLat(place[counter]["coordinates"])
-    .setPopup(new mapboxgl.Popup().setHTML(poptext))
-    marker.togglePopup();
-    counter++;
-    move();
-    }, 5000);
-   
-  }
   
   // Do not edit code past this point
   if (typeof module !== 'undefined') {
     module.exports = { move };
   }
   
+
+  var currentMarkers=[];
+
+async function run () {
+  const locations = await getChargersLocations();
+  console.log(new Date());
+  console.log(locations);
+
+  if (currentMarkers!==null) {
+    for (var i = currentMarkers.length - 1; i >= 0; i--) {
+      currentMarkers[i].remove();
+    }
+}
+
+for (let i = 0; i< locations.length; i++){
+
+  let poptext = "Bus code: " + locations[i]["id"];
+  let coordinates = [0,0];
+  coordinates[0]= locations[i]["attributes"]["longitude"];
+  coordinates[1]= locations[i]["attributes"]["latitude"];
+
+// Create a default Marker and add it to the map.
+var marker1 = new mapboxgl.Marker()
+.setLngLat(coordinates)
+.addTo(map)
+.setPopup(new mapboxgl.Popup().setHTML(poptext))
+.togglePopup();
+ 
+    currentMarkers.push(marker1);
+
+}
+  setTimeout(run, 5000);
+}
+
+
+async function getChargersLocations() {
+  const url = 'https://api-v3.mbta.com/vehicles?filter[route]=1&include=trip';
+  const response = await fetch(url);
+  const json = await response.json();
+  return json.data;
+}
+
+
+
+
+run();
