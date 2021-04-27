@@ -16,7 +16,7 @@ body {
   }
 
   .marker {
-   
+    color: brown;
     background-size: cover;
     width: 100px;
     height: 100px;
